@@ -51,7 +51,7 @@ export default function PatientPage({ params }: PageProps) {
     }, [slug]);
 
     return (
-        <div className="container mx-10 max-w-2xl">
+        <div className="container md:px-10 px-5 pb-10">
             <button
                 className="text-indigo-600 font-bold rounded text-sm mb-4"
                 onClick={() => window.history.back()}
@@ -77,7 +77,7 @@ export default function PatientPage({ params }: PageProps) {
                 <div>
                     <h2 className='font-bold text-2xl mt-4 mb-1'>Patient 3D Model</h2>
                     <p className='mb-4'>This model was generated based on the patients point cloud data. You can interact with it below.</p>
-                    {(patient && !refreshingData) ? <PCDModel width={500} height={500} /> : <Skeleton height={500} width={500} />}
+                    {(patient && !refreshingData) ? <PCDModel /> : <Skeleton width={300} height={300} />}
                 </div>
             </div>
         </div>

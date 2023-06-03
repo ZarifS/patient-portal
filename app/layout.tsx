@@ -9,7 +9,7 @@ export const metadata = {
 }
 
 const RenderLogo = () => (
-  <div className="p-10">
+  <div className="md:p-10 p-5">
     <h1 className="font-bold text-2xl text-indigo-700">PortalX</h1>
     <h3>Next Generation Patient Management</h3>
   </div>
