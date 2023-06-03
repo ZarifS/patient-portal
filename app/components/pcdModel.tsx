@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader.js';
 
-const PCDModel = ({ width = 500, height = 500, modelPath = './sampleModel.pcd' }) => {
+const PCDModel = ({ width = 500, height = 500, modelPath = '../../../sampleModel.pcd' }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     let container = containerRef.current;
     let camera: THREE.Object3D<THREE.Event>, scene: THREE.Scene, renderer: THREE.WebGLRenderer;
