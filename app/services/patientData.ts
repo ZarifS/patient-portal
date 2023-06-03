@@ -13,26 +13,26 @@ export interface PatientData {
 }
 
 export interface PatientDataResponse {
-    patientData: PatientData[], 
+    data: PatientData[], 
     nextPage: number | null,
     maxPages: number,
 }
     
 // Mock an asynchronous API call to retrieve patient data
-export const retrievePatientData = (page = 1) => {
+export const retrievePatientData = (page = 1, filters = {}) => {
     // Mimic pagination
-    let startIndex = (page - 1) * 10;
-    let endIndex = startIndex + 10;
-    let maxPages = Math.ceil(PATIENT_DATA.length / 10);
+    let startIndex = (page - 1) * 15;
+    let endIndex = startIndex + 15;
+    let maxPages = Math.ceil(PATIENT_DATA.length / 15);
     // Slice the data to return only 10 patients at a time
-    let patientData = PATIENT_DATA.slice(startIndex, endIndex) as PatientData[];
+    let data = PATIENT_DATA.slice(startIndex, endIndex) as PatientData[];
     let nextPage = PATIENT_DATA.length > endIndex ? page + 1 : null;
     // Mock an asynchronous API call
     return new Promise<PatientDataResponse>((resolve, reject) => {
         setTimeout(() => {
-            resolve({patientData, nextPage: nextPage, maxPages});
-        }, 0);
-        
+            resolve({data, nextPage: nextPage, maxPages});
+            // reject(new Error('Failed to retrieve patient data as server is down.'))
+        }, 500);
     }
     );
 }
@@ -44,6 +44,6 @@ export const getPatientById = (id: number) => {
             const patient = PATIENT_DATA.find(patient => patient.id == id);
             if(!patient) reject('Patient not found');
             resolve(patient as PatientData);
-        }, 0);
+        }, 1500);
     });
 }

@@ -1,12 +1,12 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { retrievePatientData, PatientData } from './services/patientData';
-import PCDModel from './components/pcdModel';
 
 export default function Home() {
   const [patientData, setPatientData] = useState<PatientData[] | null>(null);
-  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [page, setPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
@@ -16,16 +16,16 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      setErrorMessage(null);
+      setPatientData(null);
       try {
-        const { patientData, nextPage, maxPages } = await retrievePatientData(page);
-        setPatientData(patientData);
+        const { data, nextPage, maxPages } = await retrievePatientData(page);
+        setPatientData(data);
         setNextPage(nextPage ? true : false);
         setMaxPages(maxPages);
       } catch (error: any) {
+        console.log(error)
         setErrorMessage(error.message);
-      } finally {
-        setLoading(false);
       }
     };
     fetchData();
@@ -44,18 +44,16 @@ export default function Home() {
             </tr>
           </thead>
           <tbody>
-            {patientData?.map((patient: PatientData) => (
-              <>
-                <tr key={patient.id} className='hover:bg-indigo-100 pr-5 h-10 cursor-pointer even:bg-gray-100' onClick={() => router.push(`/patient/${patient.id}`)}>
-                  <td>{patient.id}</td>
-                  <td>{patient.firstName}</td>
-                  <td>{patient.lastName}</td>
-                  <td>{patient.age}</td>
-                  <td>{patient.gender}</td>
-                  <td>{patient.videoUploadStatus}</td>
-                  <td>{patient.scoliosisPredictionStatus}</td>
-                </tr>
-              </>
+            {patientData?.map((patient: PatientData,) => (
+              <tr key={patient.id} className='hover:bg-indigo-100 pr-5 h-10 cursor-pointer even:bg-gray-100 capitalize' onClick={() => router.push(`/patient/${patient.id}`)}>
+                <td>{patient.id}</td>
+                <td>{patient.firstName}</td>
+                <td>{patient.lastName}</td>
+                <td>{patient.age}</td>
+                <td>{patient.gender}</td>
+                <td>{patient.videoUploadStatus}</td>
+                <td>{patient.scoliosisPredictionStatus}</td>
+              </tr>
             ))}
           </tbody>
         </table>
@@ -74,13 +72,11 @@ export default function Home() {
     <div className='flex flex-col mx-10'>
       <div className='max-w-4xl mb-5'>
         <h3 className='text-lg font-bold mb-1'>Current Patients</h3>
-        <p>You can view the list of patients registered to you below.
-          Clicking on any patient will allow you to see more information as well as 3D modelling information.
+        <p>You can view the list of patients registered to you below. Clicking on any patient will allow you to see more information as well as 3D modelling information.
         </p>
       </div>
-      {loading && <p>Loading patient data</p>}
-      {errorMessage && <p>{errorMessage}</p>}
-      {patientData && <RenderPatientTable />}
+      {errorMessage && <h1 className="text-red-500 mb-4 text-lg">There was an error trying to retrieve your data: {errorMessage}</h1>}
+      {patientData ? <RenderPatientTable /> : <Skeleton count={20} height={30} />}
     </div>
   )
 }
