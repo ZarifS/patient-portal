@@ -4,6 +4,9 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PCDLoader } from 'three/examples/jsm/loaders/PCDLoader.js';
 
+/**
+ * PCDModel is a component that renders a 3D model of a patient's point cloud data given a PCD file.
+ */
 const PCDModel = ({ modelPath = '../../../sampleModel.pcd' }) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     let container = containerRef.current;
@@ -12,16 +15,16 @@ const PCDModel = ({ modelPath = '../../../sampleModel.pcd' }) => {
 
     const getModelSize = () => {
         const windowSize = window.innerWidth;
-        let modelSize;
+        let size;
 
         if (windowSize < 640) { // if window size is less than 640px (small)
-            modelSize = 300; // set model size to 300
+            size = 300; // set model size to 300
         } else if (windowSize < 768) { // if window size is less than 768px (medium)
-            modelSize = 400; // set model size to 400
+            size = 400; // set model size to 400
         } else { // if window size is greater than or equal to 768px (large)
-            modelSize = 500; // set model size to 500
+            size = 500; // set model size to 500
         }
-        return modelSize;
+        return size;
     }
 
     useEffect(() => {

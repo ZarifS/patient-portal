@@ -1,3 +1,4 @@
+/* This file imports styles needed for Tailwind to work */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

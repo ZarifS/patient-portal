@@ -15,6 +15,9 @@ const RenderLogo = () => (
   </div>
 )
 
+/**
+ * This is the root layout for all pages.
+ */
 export default function RootLayout({
   children,
 }: {

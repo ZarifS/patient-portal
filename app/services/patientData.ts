@@ -17,25 +17,6 @@ export interface PatientDataResponse {
     nextPage: number | null,
     maxPages: number,
 }
-    
-// Mock an asynchronous API call to retrieve patient data, mimicking pagination
-export const retrievePatientData = (page = 1, filters = {}) => {
-    // Mimic pagination
-    let startIndex = (page - 1) * 15;
-    let endIndex = startIndex + 15;
-    let maxPages = Math.ceil(PATIENT_DATA.length / 15);
-    // Slice the data to return only 10 patients at a time
-    let data = PATIENT_DATA.slice(startIndex, endIndex) as PatientData[];
-    let nextPage = PATIENT_DATA.length > endIndex ? page + 1 : null;
-    // Mock an asynchronous API call
-    return new Promise<PatientDataResponse>((resolve, reject) => {
-        setTimeout(() => {
-            resolve({data, nextPage: nextPage, maxPages});
-            // reject(new Error('Failed to retrieve patient data as server is down.'))
-        }, 500);
-    }
-    );
-}
 
 // Mock an asynchronous API call to retrieve patient data
 export const retrieveAllPatientData = () => {

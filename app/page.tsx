@@ -5,6 +5,9 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import { retrieveAllPatientData, PatientData } from './services/patientData';
 
+/**
+ * This page is responsible for rendering the main home page with a list of all patients.
+ */
 export default function Home() {
   const [allPatientData, setAllPatientData] = useState<PatientData[] | null>(null);
   const [errorMessage, setErrorMessage] = useState(null);
@@ -46,14 +49,13 @@ export default function Home() {
 }
 
 // Renders the data for patients given an array of patient data and handles search, filter, and pagination
-const RenderDataTable = ({ data }: { data: PatientData[] }) => {
+export const RenderDataTable = ({ data }: { data: PatientData[] }) => {
   // state for search, filter, and pagination
   const [searchTerm, setSearchTerm] = useState("");
   const [filterGender, setFilterGender] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(15);
   const [sortBy, setSortBy] = useState<'firstName' | 'lastName' | 'age' | 'id'>('id');
-
   const router = useRouter();
 
   const columns = ['ID', 'First Name', 'Last Name', 'Age', 'Gender', 'Video Status', 'Predicition Status']
@@ -107,13 +109,13 @@ const RenderDataTable = ({ data }: { data: PatientData[] }) => {
         <input type="text" placeholder="Search by name" className='bg-gray-100 text-sm p-2.5 w-80' onChange={handleSearchChange} />
         <div className='flex mb-2 mt-2'>
           <select id='sorting' className='bg-gray-100 text-gray-900 text-sm p-2.5 mr-2 w-44' onChange={handleSortChange}>
-            <option value="id" selected >Sort by ID</option>
+            <option value="id" >Sort by ID</option>
             <option value="firstName">Sort by First Name</option>
             <option value="lastName">Sort by Last Name</option>
             <option value="age">Sort by Age</option>
           </select>
           <select id='filterBy_gender' onChange={handleFilterChange} className='bg-gray-100 text-gray-900 text-sm p-2.5 w-40'>
-            <option value="" selected>Filter by gender</option>
+            <option value="">Filter by gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>

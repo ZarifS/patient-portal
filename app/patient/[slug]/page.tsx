@@ -6,6 +6,9 @@ import { getPatientById, PatientData } from '../../services/patientData';
 import PCDModel from '../../components/pcdModel';
 import { PageProps } from '../../../.next/types/app/page';
 
+/**
+ * This page is responsible for rendering the patient data for a single patient.
+ */
 export default function PatientPage({ params }: PageProps) {
     const { slug } = params
     const [refreshingData, setRefreshingData] = useState(false);
