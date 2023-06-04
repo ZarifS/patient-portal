@@ -51,3 +51,7 @@ Fetch and display data: Write a React component that fetches this data and displ
 Interactivity and updates: Add a feature where a user can manually refresh the videoUploadStatus, scoliosisPredictionStatus, and pointCloudData for a specific patient. The feature should be designed in a way that users can clearly see whether the data is being fetched or if an error has occurred.
 
 Styling and responsiveness: Make the application responsive so that it maintains its layout on different screen sizes. Use Tailwind for basic styling.
+
+## Screenshots
+![Screenshot 2023-06-03 235143](https://github.com/ZarifS/patient-portal/assets/14790505/cb2f06b1-65d3-43bb-8f32-76fc848cc30b)
+![Screenshot 2023-06-03 235200](https://github.com/ZarifS/patient-portal/assets/14790505/1fee93a1-f614-4f35-a8e8-30949798f516)
